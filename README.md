@@ -8,6 +8,10 @@ http://www.vergenet.net/~conrad/boids/pseudocode.html
 
 <a href="https://github.com/kellybs1/Boids/blob/master/Build/kellybs1Boids2.exe?raw=true">/Build/kellybs1Boids2.exe</a>
 
+Note: You may need to unblock the unsigned executable: Right click the exe -> Properties, and in the bottom section click the Unblock checkbox and then click OK.
+
+<img src="unblock.png">
+
 
 ## Source
 
