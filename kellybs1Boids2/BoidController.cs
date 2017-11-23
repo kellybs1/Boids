@@ -139,7 +139,7 @@ namespace kellybs1Boids2
         }
 
         //mapping function maps given radian value to a modified colour
-        //Credit: Liam gave me the idea for changing colours
+        //Credit: Liam Harris for the idea of changing colours based on angle
         //https://www.particleincell.com/2014/colormap/
         private Color radToColourMap(float value)
         {
