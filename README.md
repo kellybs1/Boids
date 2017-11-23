@@ -26,11 +26,12 @@ Each cycle of the program, each Boids updates which Boids are its neighbours, th
 
 ## Screenshot
 
-
+<img src="screenshot.png" width="640">
 
 ## Notes
 
 Click/right-click/press ESC to toggle on-screen controls.
+Application opens in full-screen on primary monitor.
 
 
 
