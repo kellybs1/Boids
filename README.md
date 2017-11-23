@@ -21,7 +21,7 @@ The individual Boid calculates its velocity based on three basic factors:
 
 Different weightings are applied to the three values to modify the behaviour of the flock.
     
-Each cycle of the program, each Boids updates which Boids are its neighbours, then goe through the process of updating its velocity based on the three basic factors.
+Each cycle of the program, each Boids updates which Boids are its neighbours, then goes through the process of updating its velocity based on the three basic factors.
 
 
 ## Screenshot
