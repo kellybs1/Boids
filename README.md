@@ -3,6 +3,8 @@
 A basic flock behaviour simulation, primarily based on the pseudocode by Conrad Parker, available here:
 http://www.vergenet.net/~conrad/boids/pseudocode.html
 
+I have opted to visualise the objects as Fush, due to my Kiwi accent...
+
 
 ## Build
 
