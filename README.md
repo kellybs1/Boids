@@ -26,7 +26,7 @@ Each cycle of the program, each Boids updates which Boids are its neighbours, th
 
 ## Screenshot
 
-<img src="screenshot.png" width="640">
+<img src="screenshot.png" width="900">
 
 ## Notes
 
