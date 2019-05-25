@@ -55,7 +55,7 @@ namespace kellybs1Boids2
             boids = new Boid[nBoids];
             halfBoid = Constants.BOID_SIZE / 2;
             thirdBoid = Constants.BOID_SIZE / 3;
-            buffer.SmoothingMode = SmoothingMode.AntiAlias;
+            buffer.SmoothingMode = SmoothingMode.None;
 
             generateBoids();
             flockSize = boids.Length;
@@ -211,22 +211,19 @@ namespace kellybs1Boids2
         //update alignment value
         public void RefreshAlignment(float value)
         {
-            for (int i = 0; i < nBoids; i++)
-                boids[i].Alignment = value;
+            CommonBoidProperties.Alignment = value;
         }
 
         //update separation value
         public void RefreshSeparation(float value)
         {
-            for (int i = 0; i < nBoids; i++)
-                boids[i].Separation = value;
+            CommonBoidProperties.Separation = value;
         }
 
         //update separation value
         public void RefreshNeighbourDistance(int value)
         {
-            for (int i = 0; i < nBoids; i++)
-                boids[i].NeighbourDistance = value;
+            CommonBoidProperties.NeighbourDistance = value;
         }
 
     }

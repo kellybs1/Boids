@@ -22,7 +22,7 @@ namespace kellybs1Boids2
 
         public Form1()
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
 
 
@@ -112,6 +112,7 @@ namespace kellybs1Boids2
             boidCon = new BoidController(bufferGraphics, Constants.N_BOIDS, panelWidth, panelHeight);
 
             //go
+            timer1.Interval = Constants.TICKERTICKTICK;
             timer1.Enabled = true;
 
             

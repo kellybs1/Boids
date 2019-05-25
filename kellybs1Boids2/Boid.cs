@@ -38,10 +38,7 @@ namespace kellybs1Boids2
         private int myIndex;
         private Boid[] boids;
         private int boidsLength;
-        public float Alignment { get; set; }
-        public float Separation { get; set; }
 
-        public int NeighbourDistance { get; set; }
 
         //neighbours
         private List<Boid> neighbours;
@@ -56,10 +53,17 @@ namespace kellybs1Boids2
         private float xVelocity;
         private float yVelocity;
 
+        private PointF alignment;
+        private PointF cohesion;
+        private PointF separation;
+
         public float angleRads { get; set; }
 
         public Boid(float inXPos, float inYPos, int inCanvasWidth, int inCanvasHeight, Boid[] inBoids, int inMyIndex)
         {
+            alignment = new PointF(0, 0);
+            cohesion = new PointF(0, 0);
+            separation = new PointF(0, 0);
             halfBoid = Constants.BOID_SIZE / 2;
             neighbourCount = 0;
             myIndex = inMyIndex;
@@ -71,10 +75,6 @@ namespace kellybs1Boids2
             YPos = inYPos;
             xVelocity = 0;
             yVelocity = 0;
-            //default alignment and separation
-            Alignment = Constants.ALIGNMENT_WEIGHT;
-            Separation = Constants.SEPARATION_WEIGHT;
-            NeighbourDistance = Constants.NEIGHBOUR_DIST;
         }
 
         //runs all methods to be run during each step of movement cycle
@@ -100,19 +100,19 @@ namespace kellybs1Boids2
             if (neighbourCount > 0)
             {
                 //get alignment, separation and cohesion point
-                PointF align = alignment();
-                PointF cohes = cohesion();
-                PointF separ = separation();
+                updateAlignment();
+                updateCohesion();
+                updateSeparation();
 
                 //combine points with weighted values
-                float targetX = align.X * Alignment +
-                                cohes.X * Constants.COHESION_WEIGHT +
-                                separ.X * Separation;
+                float targetX = alignment.X * CommonBoidProperties.Alignment +
+                                cohesion.X * Constants.COHESION_WEIGHT +
+                                separation.X * CommonBoidProperties.Separation;
 
 
-                float targetY = align.Y * Alignment +
-                                cohes.Y * Constants.COHESION_WEIGHT +
-                                separ.Y * Separation;
+                float targetY = alignment.Y * CommonBoidProperties.Alignment +
+                                cohesion.Y * Constants.COHESION_WEIGHT +
+                                separation.Y * CommonBoidProperties.Separation;
 
                 //calculate distance to target
                 float distanceX = targetX - XPos;
@@ -126,7 +126,7 @@ namespace kellybs1Boids2
         }
 
         //cohesion - move towards the average position of your neighbors
-        private PointF cohesion()
+        private void updateCohesion()
         {
             //average neighbour positions
             float avgX = 0;
@@ -138,15 +138,13 @@ namespace kellybs1Boids2
                 avgY += fush.YPos;
             }
             //now average
-            float targetX = avgX / neighbourCount;
-            float targetY = avgY / neighbourCount;
-
-            return new PointF(targetX, targetY);        
+            cohesion.X = avgX / neighbourCount;
+            cohesion.Y = avgY / neighbourCount;
         }
 
 
         //alignment - match your neighbors' average velocity
-        private PointF alignment()
+        private void updateAlignment()
         {
             //find my neighbours' average direction
             float avgX = 0;
@@ -160,16 +158,15 @@ namespace kellybs1Boids2
             }
 
             //average 
-            avgX = avgX / neighbourCount;
-            avgY = avgY / neighbourCount;
-
-            return new PointF(avgX, avgY);
+            alignment.X = avgX / neighbourCount;
+            alignment.Y = avgY / neighbourCount;
         }
 
         //separation - space between myself and neighbours
-        private PointF separation()
+        private void updateSeparation()
         {
-            PointF dist = new Point(0, 0);
+            separation.X = 0;
+            separation.Y = 0;
 
             for (int i = 0; i < neighbourCount; i++)
             {
@@ -184,11 +181,10 @@ namespace kellybs1Boids2
                 //change position if too close
                 if (diffX < Constants.BOID_DIST && diffY < Constants.BOID_DIST)
                 {
-                    dist.X -= aDiffX;
-                    dist.Y -= aDiffY;
+                    separation.X -= aDiffX;
+                    separation.Y -= aDiffY;
                 }
             }
-            return dist;
         }
   
 
@@ -237,8 +233,6 @@ namespace kellybs1Boids2
                 YPos = 0 - Constants.BOID_SIZE;
                 return;
             }
-
-
         }
 
         //fetches neighbouring boids
@@ -255,7 +249,7 @@ namespace kellybs1Boids2
                     float diffX = Math.Abs((boids[i].XPos + halfBoid) - (XPos + halfBoid));
                     float diffY = Math.Abs((boids[i].YPos + halfBoid) - (YPos + halfBoid));
                     //if they're close, add them
-                    if (diffX < NeighbourDistance && diffY < NeighbourDistance)
+                    if (diffX < CommonBoidProperties.NeighbourDistance && diffY < CommonBoidProperties.NeighbourDistance)
                         neighbours.Add(boids[i]);
                 }
             }

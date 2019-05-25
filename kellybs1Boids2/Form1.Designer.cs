@@ -31,22 +31,22 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelDraw = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelNeighbours = new System.Windows.Forms.Label();
+            this.trackBarNeighbours = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelSeparation = new System.Windows.Forms.Label();
+            this.trackBarSeparation = new System.Windows.Forms.TrackBar();
             this.labelAlignmentVal = new System.Windows.Forms.Label();
             this.labelAlignment = new System.Windows.Forms.Label();
             this.trackBarAlignment = new System.Windows.Forms.TrackBar();
             this.buttonMin = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelSeparation = new System.Windows.Forms.Label();
-            this.trackBarSeparation = new System.Windows.Forms.TrackBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelNeighbours = new System.Windows.Forms.Label();
-            this.trackBarNeighbours = new System.Windows.Forms.TrackBar();
             this.panelDraw.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlignment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSeparation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNeighbours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSeparation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlignment)).BeginInit();
             this.SuspendLayout();
             // 
             // panelDraw
@@ -68,6 +68,79 @@
             this.panelDraw.Size = new System.Drawing.Size(770, 473);
             this.panelDraw.TabIndex = 0;
             this.panelDraw.Click += new System.EventHandler(this.panelDraw_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(655, 147);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 20);
+            this.label2.TabIndex = 10;
+            // 
+            // labelNeighbours
+            // 
+            this.labelNeighbours.AutoSize = true;
+            this.labelNeighbours.BackColor = System.Drawing.Color.Black;
+            this.labelNeighbours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNeighbours.ForeColor = System.Drawing.Color.White;
+            this.labelNeighbours.Location = new System.Drawing.Point(554, 147);
+            this.labelNeighbours.Name = "labelNeighbours";
+            this.labelNeighbours.Size = new System.Drawing.Size(113, 20);
+            this.labelNeighbours.TabIndex = 9;
+            this.labelNeighbours.Text = "Range of sight";
+            // 
+            // trackBarNeighbours
+            // 
+            this.trackBarNeighbours.BackColor = System.Drawing.Color.White;
+            this.trackBarNeighbours.LargeChange = 20;
+            this.trackBarNeighbours.Location = new System.Drawing.Point(318, 170);
+            this.trackBarNeighbours.Maximum = 500;
+            this.trackBarNeighbours.Minimum = 10;
+            this.trackBarNeighbours.Name = "trackBarNeighbours";
+            this.trackBarNeighbours.Size = new System.Drawing.Size(420, 45);
+            this.trackBarNeighbours.TabIndex = 8;
+            this.trackBarNeighbours.Value = 34;
+            this.trackBarNeighbours.Scroll += new System.EventHandler(this.trackBarNeighbours_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Black;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(655, 250);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 20);
+            this.label1.TabIndex = 7;
+            // 
+            // labelSeparation
+            // 
+            this.labelSeparation.AutoSize = true;
+            this.labelSeparation.BackColor = System.Drawing.Color.Black;
+            this.labelSeparation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSeparation.ForeColor = System.Drawing.Color.White;
+            this.labelSeparation.Location = new System.Drawing.Point(554, 250);
+            this.labelSeparation.Name = "labelSeparation";
+            this.labelSeparation.Size = new System.Drawing.Size(87, 20);
+            this.labelSeparation.TabIndex = 6;
+            this.labelSeparation.Text = "Separation";
+            // 
+            // trackBarSeparation
+            // 
+            this.trackBarSeparation.BackColor = System.Drawing.Color.White;
+            this.trackBarSeparation.LargeChange = 20;
+            this.trackBarSeparation.Location = new System.Drawing.Point(318, 273);
+            this.trackBarSeparation.Maximum = 200;
+            this.trackBarSeparation.Minimum = 1;
+            this.trackBarSeparation.Name = "trackBarSeparation";
+            this.trackBarSeparation.Size = new System.Drawing.Size(420, 45);
+            this.trackBarSeparation.SmallChange = 5;
+            this.trackBarSeparation.TabIndex = 5;
+            this.trackBarSeparation.Value = 25;
+            this.trackBarSeparation.Scroll += new System.EventHandler(this.trackBarSeparation_Scroll);
             // 
             // labelAlignmentVal
             // 
@@ -136,81 +209,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 15;
+            this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Black;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(655, 250);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 20);
-            this.label1.TabIndex = 7;
-            // 
-            // labelSeparation
-            // 
-            this.labelSeparation.AutoSize = true;
-            this.labelSeparation.BackColor = System.Drawing.Color.Black;
-            this.labelSeparation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSeparation.ForeColor = System.Drawing.Color.White;
-            this.labelSeparation.Location = new System.Drawing.Point(554, 250);
-            this.labelSeparation.Name = "labelSeparation";
-            this.labelSeparation.Size = new System.Drawing.Size(87, 20);
-            this.labelSeparation.TabIndex = 6;
-            this.labelSeparation.Text = "Separation";
-            // 
-            // trackBarSeparation
-            // 
-            this.trackBarSeparation.BackColor = System.Drawing.Color.White;
-            this.trackBarSeparation.LargeChange = 20;
-            this.trackBarSeparation.Location = new System.Drawing.Point(318, 273);
-            this.trackBarSeparation.Maximum = 200;
-            this.trackBarSeparation.Minimum = 1;
-            this.trackBarSeparation.Name = "trackBarSeparation";
-            this.trackBarSeparation.Size = new System.Drawing.Size(420, 45);
-            this.trackBarSeparation.SmallChange = 5;
-            this.trackBarSeparation.TabIndex = 5;
-            this.trackBarSeparation.Value = 25;
-            this.trackBarSeparation.Scroll += new System.EventHandler(this.trackBarSeparation_Scroll);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(655, 147);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 20);
-            this.label2.TabIndex = 10;
-            // 
-            // labelNeighbours
-            // 
-            this.labelNeighbours.AutoSize = true;
-            this.labelNeighbours.BackColor = System.Drawing.Color.Black;
-            this.labelNeighbours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNeighbours.ForeColor = System.Drawing.Color.White;
-            this.labelNeighbours.Location = new System.Drawing.Point(554, 147);
-            this.labelNeighbours.Name = "labelNeighbours";
-            this.labelNeighbours.Size = new System.Drawing.Size(113, 20);
-            this.labelNeighbours.TabIndex = 9;
-            this.labelNeighbours.Text = "Range of sight";
-            // 
-            // trackBarNeighbours
-            // 
-            this.trackBarNeighbours.BackColor = System.Drawing.Color.White;
-            this.trackBarNeighbours.LargeChange = 20;
-            this.trackBarNeighbours.Location = new System.Drawing.Point(318, 170);
-            this.trackBarNeighbours.Maximum = 500;
-            this.trackBarNeighbours.Minimum = 10;
-            this.trackBarNeighbours.Name = "trackBarNeighbours";
-            this.trackBarNeighbours.Size = new System.Drawing.Size(420, 45);
-            this.trackBarNeighbours.TabIndex = 8;
-            this.trackBarNeighbours.Value = 34;
-            this.trackBarNeighbours.Scroll += new System.EventHandler(this.trackBarNeighbours_Scroll);
             // 
             // Form1
             // 
@@ -229,9 +229,9 @@
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.panelDraw.ResumeLayout(false);
             this.panelDraw.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlignment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSeparation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNeighbours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSeparation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlignment)).EndInit();
             this.ResumeLayout(false);
 
         }

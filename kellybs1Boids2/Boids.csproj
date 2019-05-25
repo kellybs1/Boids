@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Boid.cs" />
     <Compile Include="BoidController.cs" />
+    <Compile Include="CommonBoidProperties.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
