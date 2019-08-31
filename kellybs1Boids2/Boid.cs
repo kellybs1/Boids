@@ -26,7 +26,7 @@ namespace kellybs1Boids2
      * 
      * Each cycle of the program, each Boids updates which Boids are its neighbours, then goes
      * through the process of updating its velocity based on the three basic factors.
-     */ 
+     */
 
     public class Boid
     {
@@ -44,9 +44,6 @@ namespace kellybs1Boids2
         private List<Boid> neighbours;
         private int neighbourCount;
 
-        //half boid size
-        private int halfBoid;
-
         //positioning
         public float XPos { get; set; }
         public float YPos { get; set; }
@@ -59,12 +56,11 @@ namespace kellybs1Boids2
 
         public float angleRads { get; set; }
 
-        public Boid(float inXPos, float inYPos, int inCanvasWidth, int inCanvasHeight, Boid[] inBoids, int inMyIndex)
+        public Boid( float inXPos, float inYPos, int inCanvasWidth, int inCanvasHeight, Boid[] inBoids, int inMyIndex )
         {
-            alignment = new PointF(0, 0);
-            cohesion = new PointF(0, 0);
-            separation = new PointF(0, 0);
-            halfBoid = Constants.BOID_SIZE / 2;
+            alignment = new PointF( 0, 0 );
+            cohesion = new PointF( 0, 0 );
+            separation = new PointF( 0, 0 );
             neighbourCount = 0;
             myIndex = inMyIndex;
             boids = inBoids;
@@ -89,15 +85,15 @@ namespace kellybs1Boids2
         //moves the Boid one step in its current direction
         private void move()
         {
-            XPos += xVelocity * Constants.BOID_SPEED;
-            YPos += yVelocity * Constants.BOID_SPEED;
+            XPos += ( xVelocity * Constants.BOID_SPEED );
+            YPos += ( yVelocity * Constants.BOID_SPEED );
         }
 
         //updates the Boid's direction
         private void updateDirection()
         {
             //if i have neighbours
-            if (neighbourCount > 0)
+            if ( neighbourCount > 0 )
             {
                 //get alignment, separation and cohesion point
                 updateAlignment();
@@ -105,23 +101,23 @@ namespace kellybs1Boids2
                 updateSeparation();
 
                 //combine points with weighted values
-                float targetX = alignment.X * CommonBoidProperties.Alignment +
-                                cohesion.X * Constants.COHESION_WEIGHT +
-                                separation.X * CommonBoidProperties.Separation;
+                float targetX = ( alignment.X * CommonBoidProperties.Alignment ) +
+                                ( cohesion.X * Constants.COHESION_WEIGHT ) +
+                                ( separation.X * CommonBoidProperties.Separation );
 
 
-                float targetY = alignment.Y * CommonBoidProperties.Alignment +
-                                cohesion.Y * Constants.COHESION_WEIGHT +
-                                separation.Y * CommonBoidProperties.Separation;
+                float targetY = ( alignment.Y * CommonBoidProperties.Alignment ) +
+                                ( cohesion.Y * Constants.COHESION_WEIGHT ) +
+                                ( separation.Y * CommonBoidProperties.Separation );
 
                 //calculate distance to target
-                float distanceX = targetX - XPos;
-                float distanceY = targetY - YPos;
+                float distanceX = ( targetX - XPos );
+                float distanceY = ( targetY - YPos );
                 //calculate angle to target
-                angleRads = (float)Math.Atan2(distanceY, distanceX);
+                angleRads = (float)Math.Atan2( distanceY, distanceX );
                 //calculate modifications to current velocity
-                xVelocity = (float)Math.Cos(angleRads);
-                yVelocity = (float)Math.Sin(angleRads);
+                xVelocity = (float)Math.Cos( angleRads );
+                yVelocity = (float)Math.Sin( angleRads );
             }
         }
 
@@ -132,14 +128,14 @@ namespace kellybs1Boids2
             float avgX = 0;
             float avgY = 0;
             //total
-            foreach (Boid fush in neighbours)
+            foreach ( Boid fush in neighbours )
             {
                 avgX += fush.XPos;
                 avgY += fush.YPos;
             }
             //now average
-            cohesion.X = avgX / neighbourCount;
-            cohesion.Y = avgY / neighbourCount;
+            cohesion.X = ( avgX / neighbourCount );
+            cohesion.Y = ( avgY / neighbourCount );
         }
 
 
@@ -150,7 +146,7 @@ namespace kellybs1Boids2
             float avgX = 0;
             float avgY = 0;
 
-            foreach (Boid fush in neighbours)
+            foreach ( Boid fush in neighbours )
             {
                 //total
                 avgX += fush.xVelocity;
@@ -158,8 +154,8 @@ namespace kellybs1Boids2
             }
 
             //average 
-            alignment.X = avgX / neighbourCount;
-            alignment.Y = avgY / neighbourCount;
+            alignment.X = ( avgX / neighbourCount );
+            alignment.Y = ( avgY / neighbourCount );
         }
 
         //separation - space between myself and neighbours
@@ -168,33 +164,33 @@ namespace kellybs1Boids2
             separation.X = 0;
             separation.Y = 0;
 
-            for (int i = 0; i < neighbourCount; i++)
+            for ( int i = 0; i < neighbourCount; i++ )
             {
                 //get signed difference
                 //use halfboid modifier to get center of boids
-                float aDiffX = (neighbours[i].XPos + halfBoid) - (XPos + halfBoid);
-                float aDiffY = (neighbours[i].YPos + halfBoid) - (YPos + halfBoid);
+                float aDiffX = ( neighbours[i].XPos + Constants.HALF_BOID ) - ( XPos + Constants.HALF_BOID );
+                float aDiffY = ( neighbours[i].YPos + Constants.HALF_BOID ) - ( YPos + Constants.HALF_BOID );
                 //get absolute differences between self and neighbour
-                float diffX = Math.Abs(aDiffX);
-                float diffY = Math.Abs(aDiffY);
+                float diffX = Math.Abs( aDiffX );
+                float diffY = Math.Abs( aDiffY );
 
                 //change position if too close
-                if (diffX < Constants.BOID_DIST && diffY < Constants.BOID_DIST)
+                if ( diffX < Constants.BOID_DIST && diffY < Constants.BOID_DIST )
                 {
                     separation.X -= aDiffX;
                     separation.Y -= aDiffY;
                 }
             }
         }
-  
+
 
         //bounces of sides of screen
         private void bounce()
         {
-            if (XPos < 0 || XPos > canvasWidth)
+            if ( XPos < 0 || XPos > canvasWidth )
                 xVelocity *= -1;
             else
-            if (YPos < 0 || YPos > canvasHeight)
+            if ( YPos < 0 || YPos > canvasHeight )
                 yVelocity *= -1;
 
         }
@@ -207,28 +203,28 @@ namespace kellybs1Boids2
             float warpBoundY = 0 - Constants.BOID_SIZE;
 
             //gone off the left
-            if (XPos < warpBoundX)
+            if ( XPos < warpBoundX )
             {
-                XPos = canvasWidth - 1;
+                XPos = ( canvasWidth - 1 );
                 return;
             }
 
             //gone off the right
-            if (XPos > canvasWidth - 1)
+            if ( XPos > ( canvasWidth - 1 ) )
             {
                 XPos = 0 - Constants.BOID_SIZE;
                 return;
             }
 
             //gone off the top
-            if (YPos < warpBoundY)
+            if ( YPos < warpBoundY )
             {
-                YPos = canvasHeight - 1;
+                YPos = ( canvasHeight - 1 );
                 return;
             }
 
             //gone off the bottom
-            if (YPos > canvasHeight - 1)
+            if ( YPos > ( canvasHeight - 1 ) )
             {
                 YPos = 0 - Constants.BOID_SIZE;
                 return;
@@ -240,17 +236,17 @@ namespace kellybs1Boids2
         {
             neighbours = new List<Boid>();
             //check distances between self and other boids
-            for (int i = 0; i < boidsLength; i++)
+            for ( int i = 0; i < boidsLength; i++ )
             {
-                if (i != myIndex) //don't check self
+                if ( i != myIndex ) //don't check self
                 {
                     //get differences between self and neighbour
                     //use half boid size modifier to calculate on center of boid
-                    float diffX = Math.Abs((boids[i].XPos + halfBoid) - (XPos + halfBoid));
-                    float diffY = Math.Abs((boids[i].YPos + halfBoid) - (YPos + halfBoid));
+                    float diffX = Math.Abs( ( boids[i].XPos + Constants.HALF_BOID ) - ( XPos + Constants.HALF_BOID ) );
+                    float diffY = Math.Abs( ( boids[i].YPos + Constants.HALF_BOID ) - ( YPos + Constants.HALF_BOID ) );
                     //if they're close, add them
-                    if (diffX < CommonBoidProperties.NeighbourDistance && diffY < CommonBoidProperties.NeighbourDistance)
-                        neighbours.Add(boids[i]);
+                    if ( diffX < CommonBoidProperties.NeighbourDistance && diffY < CommonBoidProperties.NeighbourDistance )
+                        neighbours.Add( boids[i] );
                 }
             }
             //update the count
@@ -258,21 +254,21 @@ namespace kellybs1Boids2
         }
 
         //randomises a Boids current direction
-        public void RandomiseDirection(Random rand)
+        public void RandomiseDirection( Random rand )
         {
             //generate random target
-            float targetXPos = rand.Next(canvasWidth);
-            float targetYPos = rand.Next(canvasHeight);
+            float targetXPos = rand.Next( canvasWidth );
+            float targetYPos = rand.Next( canvasHeight );
 
             //calculate distance to target
             float distanceX = targetXPos - XPos;
             float distanceY = targetYPos - YPos;
 
             //calculate angle to target
-            angleRads = (float)Math.Atan2(distanceY, distanceX);
+            angleRads = (float)Math.Atan2( distanceY, distanceX );
             //calculate modifications to current angle
-            float moveX = (float)Math.Cos(angleRads);
-            float moveY = (float)Math.Sin(angleRads);
+            float moveX = (float)Math.Cos( angleRads );
+            float moveY = (float)Math.Sin( angleRads );
             xVelocity = moveX * Constants.BOID_SPEED;
             yVelocity = moveY * Constants.BOID_SPEED;
         }
